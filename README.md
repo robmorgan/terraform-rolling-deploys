@@ -9,6 +9,10 @@ The post is here: http://robmorgan.id.au/post/139602239473/rolling-deploys-on-aw
 It is based on a concept from Paul Hinze:
 https://groups.google.com/forum/#!msg/terraform-tool/7Gdhv1OAc80/iNQ93riiLwAJ
 
+## Architecture
+
+![terraform aws architecture - current architecture](https://cloud.githubusercontent.com/assets/178939/13179538/9cbc9aec-d724-11e5-91e4-77b9a06ebdc6.png)
+
 ## Requirements
 
 You should have the following tools installed:
