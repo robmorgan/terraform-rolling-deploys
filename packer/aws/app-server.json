@@ -1,0 +1,71 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "ssh_username": "ubuntu",
+    "github_token": "{{env `GITHUB_TOKEN`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key` }}",
+      "region": "eu-west-1",
+      "source_ami": "ami-8d16ccfe",
+      "instance_type": "c3.large",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ami_name": "packer-base {{timestamp}}",
+      "associate_public_ip_address": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo {{user `ssh_username`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "inline": [
+        "mkdir -p /ops",
+        "chmod a+w /ops"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "ssh_keys",
+      "destination": "/ops"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo {{user `ssh_username`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "inline": [
+        "cat /ops/ssh_keys/* >> /home/ubuntu/.ssh/authorized_keys"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "packer/scripts/base.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "packer/scripts/docker.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo {{user `ssh_username`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "inline": [
+        "docker pull nginx"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "packer/scripts/cleanup.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+    }
+  ]
+}
