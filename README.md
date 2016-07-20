@@ -28,7 +28,8 @@ Additionally you will need the following environment variables set:
 
 ## Usage
 
-1. Before we create the AWS infrastructure we must first _bake_ a new AMI using Packer.
+1. Copy your public SSH key to the `ssh_keys` directory and update the path in `key-pairs.tf`.
+2. Before we create the AWS infrastructure we must first _bake_ a new AMI using Packer.
 Using the supplied `Makefile`, simply run:
 
 ```
@@ -37,14 +38,14 @@ $ make bake
 
 When Packer finishes running it will output an AMI ID we need for the next step.
 
-2. Now we can use Terraform to create the AWS resources:
+3. Now we can use Terraform to create the AWS resources:
 
 ```
 $ make plan AMI="ami-XXXYYYZZ"
 $ make apply AMI="ami-XXXYYYZZ"
 ```
 
-3. Deployment is a case of baking a fresh AMI then re-running Terraform:
+4. Deployment is a case of baking a fresh AMI then re-running Terraform:
 
 ```
 $ make bake
