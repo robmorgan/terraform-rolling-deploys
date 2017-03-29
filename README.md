@@ -4,7 +4,7 @@ This is a demo project that accompanies a blog post I wrote.
 It shows how to use various tools from the Hashicorp stack to achieve rolling
 deployments on AWS with zero downtime.
 
-The post is here: http://robmorgan.id.au/post/139602239473/rolling-deploys-on-aws-using-terraform
+The post is here: https://robmorgan.id.au/post/139602239473/rolling-deploys-on-aws-using-terraform
 
 It is based on a concept from Paul Hinze:
 https://groups.google.com/forum/#!msg/terraform-tool/7Gdhv1OAc80/iNQ93riiLwAJ
