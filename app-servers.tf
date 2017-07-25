@@ -61,8 +61,4 @@ resource "aws_launch_configuration" "lc_app" {
     security_groups = ["${aws_security_group.default.id}", "${aws_security_group.app.id}"]
 
     user_data = "${file("user_data/app-server.sh")}"
-
-    lifecycle {
-      create_before_destroy = true
-    }
 }
