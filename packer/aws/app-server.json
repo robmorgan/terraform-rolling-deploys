@@ -2,8 +2,7 @@
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-    "ssh_username": "ubuntu",
-    "github_token": "{{env `GITHUB_TOKEN`}}"
+    "ssh_username": "ubuntu"
   },
   "builders": [
     {
