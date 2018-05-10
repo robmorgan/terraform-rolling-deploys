@@ -1,4 +1,5 @@
+.terraform
 .terraform.tfstate.lock.info
+.test-data
 terraform.tfstate
 terraform.tfstate.backup
-
