@@ -1,5 +1,6 @@
 .terraform
 .terraform.tfstate.lock.info
 .test-data
+vendor
 terraform.tfstate
 terraform.tfstate.backup
