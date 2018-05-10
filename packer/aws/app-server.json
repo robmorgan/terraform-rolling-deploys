@@ -28,7 +28,7 @@
     },
     {
       "type": "file",
-      "source": "ssh_keys",
+      "source": "{{template_dir}}/../../ssh_keys",
       "destination": "/ops"
     },
     {
@@ -41,14 +41,14 @@
     {
       "type": "shell",
       "scripts": [
-        "packer/scripts/base.sh"
+        "{{template_dir}}/../scripts/base.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
     },
     {
       "type": "shell",
       "scripts": [
-        "packer/scripts/docker.sh"
+        "{{template_dir}}/../scripts/docker.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
     },
@@ -62,7 +62,7 @@
     {
       "type": "shell",
       "scripts": [
-        "packer/scripts/cleanup.sh"
+        "{{template_dir}}/../scripts/cleanup.sh"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
     }
