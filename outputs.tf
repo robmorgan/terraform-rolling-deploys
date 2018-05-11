@@ -9,3 +9,7 @@ output "asg_name" {
 output "elb_name" {
   value = "${aws_elb.elb_app.dns_name}"
 }
+
+output "url" {
+  value = "http://${aws_elb.elb_app.dns_name}"
+}

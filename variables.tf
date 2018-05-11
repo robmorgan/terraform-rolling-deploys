@@ -1,19 +1,6 @@
-variable "aws_access_key" {
-  description = "AWS access key"
-}
-
-variable "aws_secret_key" {
-  description = "AWS secret access key"
-}
-
 variable "aws_region" {
   description = "AWS region"
   default     = "eu-west-1"
-}
-
-variable "availability_zones" {
-  default = "eu-west-1a,eu-west-1b,eu-west-1c"
-  description = "List of availability zones"
 }
 
 /* VPC settings */
@@ -55,6 +42,7 @@ variable "private_subnet_az3_cidr" {
 /* Ubuntu 14.04 amis by region */
 variable "amis" {
   description = "Base AMI to launch the instances with"
+
   default = {
     us-west-1 = "ami-049d8641"
     us-east-1 = "ami-a6b8e7ce"
