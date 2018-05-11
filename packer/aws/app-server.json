@@ -11,7 +11,7 @@
       "secret_key": "{{user `aws_secret_key` }}",
       "region": "eu-west-1",
       "source_ami": "ami-8d16ccfe",
-      "instance_type": "c3.large",
+      "instance_type": "c4.large",
       "ssh_username": "{{user `ssh_username`}}",
       "ami_name": "packer-base {{timestamp}}",
       "associate_public_ip_address": true
