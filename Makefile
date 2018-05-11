@@ -1,17 +1,24 @@
-.PHONY: all bake plan apply destroy
+.PHONY: all bake test init plan apply destroy help
 
-ASG_NAME=$(shell terraform output asg_name)
+all: help
 
-all: bake plan apply
-
-bake:
+bake: ## Bake a new AMI using Packer
 	packer build packer/aws/app-server.json
 
-plan:
-	terraform plan -var "aws_access_key=${AWS_ACCESS_KEY_ID}" -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}" -var "ami=${AMI}"
+test: ## Run the automated tests using Terratest
+	cd test; go test -v -timeout 30m
 
-apply:
-	terraform apply -var "aws_access_key=${AWS_ACCESS_KEY_ID}" -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}" -var "ami=${AMI}"
+init: ## Initialize Terraform to work locally
+	terraform init
 
-destroy:
-	terraform destroy -var "aws_access_key=${AWS_ACCESS_KEY_ID}" -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}" -var "ami=${AMI}"
+plan: ## Run the Terraform plan step
+	terraform plan -var "ami=${AMI}"
+
+apply: ## Run the Terraform apply step
+	terraform apply -auto-approve -var "ami=${AMI}"
+
+destroy: ## You probably don't know what you're doing
+	terraform destroy -var "ami=${AMI}"
+
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
