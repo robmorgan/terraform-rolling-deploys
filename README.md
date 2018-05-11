@@ -18,8 +18,8 @@ https://groups.google.com/forum/#!msg/terraform-tool/7Gdhv1OAc80/iNQ93riiLwAJ
 You should have the following tools installed:
 
 * Git
-* Packer
-* Terraform
+* Packer (v1.2.3)
+* Terraform (v0.11.7)
 
 Additionally you will need the following environment variables set:
 
@@ -51,4 +51,12 @@ $ make apply AMI="ami-XXXYYYZZ"
 $ make bake
 $ make plan AMI="ami-XXXYYYZZ"
 $ make apply AMI="ami-XXXYYYZZ"
+```
+
+## Tests
+
+You can run the included tests using `Terratest`:
+
+```
+$ make test
 ```
