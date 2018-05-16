@@ -1,6 +1,7 @@
 .terraform
 .terraform.tfstate.lock.info
 .test-data
+ssh_keys/deployer.pem
 vendor
 terraform.tfstate
 terraform.tfstate.backup

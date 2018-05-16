@@ -1,0 +1,21 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    # only build the circleci branch for now
+    branches:
+      only:
+        - circleci
+    docker:
+      # specify the version
+      - image: circleci/golang:1.10
+    working_directory: /go/src/github.com/robmorgan/terraform-rolling-deploys
+    steps:
+      - checkout
+      - run: curl -L -s https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 -o /go/bin/dep && chmod +x /go/bin/dep
+      - run: curl -L -s https://releases.hashicorp.com/packer/1.2.3/packer_1.2.3_linux_amd64.zip -o /go/bin/packer.zip && unzip /go/bin/packer.zip -d /go/bin && chmod +x /go/bin/packer
+      - run: curl -L -s https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip -o /go/bin/terraform.zip && unzip /go/bin/terraform.zip -d /go/bin && chmod +x /go/bin/terraform
+      - run: dep ensure -vendor-only
+      - run: make test
