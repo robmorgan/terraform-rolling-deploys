@@ -4,3 +4,5 @@
 vendor
 terraform.tfstate
 terraform.tfstate.backup
+deployer.pem
+deployer.pub
