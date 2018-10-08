@@ -39,7 +39,7 @@ resource "aws_instance" "nat" {
       "sudo docker run --name ovpn-data -v /etc/openvpn busybox",
 
       /* Generate OpenVPN server config */
-      "sudo docker run --volumes-from ovpn-data --rm kylemanna/openvpn ovpn_genconfig -p ${var.vpc_cidr} -u udp://${aws_instance.nat.public_ip}",
+      "sudo docker run --volumes-from ovpn-data --rm mb/openvpn ovpn_genconfig -p ${var.vpc_cidr} -u udp://${aws_instance.nat.public_ip}",
     ]
   }
 }
